@@ -5,6 +5,7 @@
 
 body {
 	position: relative;
+	font-family: 'Gochi Hand', cursive;
 }
 
 .header {
@@ -34,5 +35,6 @@ body {
 	padding-right: 1rem;
 	width: 33%;
 	border: 1px solid gray;
+	
 }
 
