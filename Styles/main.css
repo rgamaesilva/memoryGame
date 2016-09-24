@@ -1,0 +1,49 @@
+* {
+	box-sizing: border-box;
+	text-align: center;
+}
+
+.header {
+	height: 7em;
+	font-size: 0.8em;
+	padding-top: 1em;
+	margin-bottom: 2em;
+	background-color: hotpink;
+	color: white
+}
+
+.container {
+	position: relative;
+	margin: 0 auto;
+	max-width: 50rem;
+	text-align: center;
+	overflow: auto;
+	position: relative;
+	margin: 0 auto;
+	max-width: 40rem;
+	text-align: center;
+}
+
+.column {
+	margin-bottom: 2rem;
+	height: 7rem;
+	margin-left: 1em;
+	float: left;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	width: 45%;
+}
+
+
+@media (min-width: 40rem) {
+	
+	.column {
+		margin-bottom: 2rem;
+		height: 7rem;
+		margin-left: 1em;
+		float: left;
+		padding-left: 1rem;
+		padding-right: 1rem;
+		width: 30%;
+	}
+}
