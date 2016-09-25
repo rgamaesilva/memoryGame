@@ -13,9 +13,9 @@
 	transition-delay: 0.2s;
 }
 
-
+/*
 #box1:active {
-	background-image: url(../Images/peppa.png);
+	background-image: url(../Images/peppa.png");
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: contain;
@@ -156,3 +156,4 @@
 	transform: rotateY(180deg);
 
 }
+*/
