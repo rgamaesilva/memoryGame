@@ -12,9 +12,14 @@ body {
 	height: 7em;
 	font-size: 0.8em;
 	padding-top: 1em;
-	margin-bottom: 2em;
+	margin-bottom: 1.5em;
 	background-color: hotpink;
 	color: white
+}
+
+.nav {
+	margin-bottom: 1em;
+	font-size: 1.5em;
 }
 
 .container {
