@@ -7,7 +7,10 @@ var newDrawnNames = [];
 var drawnIndex;
 var characterDrawn;
 
-var cardsUp = [false, false, false, false, false, false, false, false, false, false, false, false ];
+var cardsUp = ["down", "down", "down", "down", "down", "down", "down", "down", "down", "down", "down", "down" ];
+
+var countMatch = 0;
+
 
 var generateShuffle = function() {
 
@@ -51,15 +54,15 @@ var turnCardFuncBuilder = function(funcNumber) {
 var turnAllcardsOver = function() {
 	var delay = setTimeout(turn, 1000)
 	
-	function turn () {
+	function turn() {
 		for (var i = 0; i < 12; i++) {
-			if (cardsUp[i] == true) {
+			if (cardsUp[i] == "up") {
 				boxes[i].style.background = "url(../Images/logo.png)";
 				boxes[i].style.backgroundRepeat = "no-repeat";
 				boxes[i].style.backgroundPosition = "center center";
 				boxes[i].style.backgroundSize = "contain";
 				boxes[i].style.transform = "rotateY(360deg)";
-				cardsUp[i] = false;
+				cardsUp[i] = "down";
 				}
 		}
 	}
@@ -69,26 +72,72 @@ var turnAllcardsOver = function() {
 
 var finishGame = function() {
 	turnAllcardsOver();
+	var delay = setTimeout(reloading, 1000)
 	
-	location.reload(true);
+	function reloading () {
+		location.reload(true);
+	}
 	
 };
+
+var matchIndex = [];
+var checkMatch = function() {
+	var firstTrue = cardsUp.indexOf("up");
+	var secondTrue = cardsUp.indexOf("up", firstTrue + 1);
+	if (newDrawnNames[firstTrue] == newDrawnNames[secondTrue]) {
+		matchIndex.push(firstTrue);
+		matchIndex.push(secondTrue);
+		return true;
+	} else {
+		return false;
+	}
+};
+
+var congrats = function() {
+	var delay = setTimeout(message, 1000)
+	
+	function message() {
+		alert("CONGRATULATIONS YOU WON!!");
+	}
+}
 
 function turnCard0() {
 	turnCardFunc.funct0();
 	countClicks += 1;
-	cardsUp[0] = true;
+	cardsUp[0] = "up";
 	if (countClicks == 2) {
-		turnAllcardsOver();
+		if (!checkMatch()) {
+			turnAllcardsOver();
+		} else {
+			cardsUp[matchIndex[0]] = "match"
+			cardsUp[matchIndex[1]] = "match"
+			countClicks = 0;
+			matchIndex = [];
+			countMatch += 1;
+			if (countMatch == 6) {
+				alert("YOU WON!! CONGRATS!!")
+			}
+		}
 	}
 }	
 
 function turnCard1() {
 	turnCardFunc.funct1();
 	countClicks += 1;
-	cardsUp[1] = true;
+	cardsUp[1] = "up";
 	if (countClicks == 2) {
-		turnAllcardsOver();	
+		if (!checkMatch()) {
+			turnAllcardsOver();
+		} else {
+			cardsUp[matchIndex[0]] = "match"
+			cardsUp[matchIndex[1]] = "match"
+			countClicks = 0;
+			matchIndex = [];
+			countMatch += 1;
+			if (countMatch == 6) {
+				congrats();
+			}
+		}
 		
 	}
 }
@@ -96,90 +145,200 @@ function turnCard1() {
 function turnCard2() {
 	turnCardFunc.funct2();
 	countClicks += 1;
-	cardsUp[2] = true;
+	cardsUp[2] = "up";
 	if (countClicks == 2) {
-		turnAllcardsOver();	
+		if (!checkMatch()) {
+			turnAllcardsOver();
+		} else {
+			cardsUp[matchIndex[0]] = "match"
+			cardsUp[matchIndex[1]] = "match"
+			countClicks = 0;
+			matchIndex = [];
+			countMatch += 1;
+			if (countMatch == 6) {
+				congrats();
+			}
+		}	
 	}
 }	
 
 function turnCard3() {
 	turnCardFunc.funct3();
 	countClicks += 1;
-	cardsUp[3] = true;
+	cardsUp[3] = "up";
 	if (countClicks == 2) {
-		turnAllcardsOver();	
+		if (!checkMatch()) {
+			turnAllcardsOver();
+		} else {
+			cardsUp[matchIndex[0]] = "match"
+			cardsUp[matchIndex[1]] = "match"
+			countClicks = 0;
+			matchIndex = [];
+			countMatch += 1;
+			if (countMatch == 6) {
+				congrats();
+			}
+		}
 	}
 }
 
 function turnCard4() {
 	turnCardFunc.funct4();
 	countClicks += 1;
-	cardsUp[4] = true;
+	cardsUp[4] = "up";
 	if (countClicks == 2) {
-		turnAllcardsOver();	
+		if (!checkMatch()) {
+			turnAllcardsOver();
+		} else {
+			cardsUp[matchIndex[0]] = "match"
+			cardsUp[matchIndex[1]] = "match"
+			countClicks = 0;
+			matchIndex = [];
+			countMatch += 1;
+			if (countMatch == 6) {
+				congrats();
+			}
+		}
 	}
 }	
 
 function turnCard5() {
 	turnCardFunc.funct5();
 	countClicks += 1;
-	cardsUp[5] = true;
+	cardsUp[5] = "up";
 	if (countClicks == 2) {
-		turnAllcardsOver();
+		if (!checkMatch()) {
+			turnAllcardsOver();
+		} else {
+			cardsUp[matchIndex[0]] = "match"
+			cardsUp[matchIndex[1]] = "match"
+			countClicks = 0;
+			matchIndex = [];
+			countMatch += 1;
+			if (countMatch == 6) {
+				congrats();
+			}
+		}
 	}
 }
 
 function turnCard6() {
 	turnCardFunc.funct6();
 	countClicks += 1;
-	cardsUp[6] = true;
+	cardsUp[6] = "up";
 	if (countClicks == 2) {
-		turnAllcardsOver();	
+		if (!checkMatch()) {
+			turnAllcardsOver();
+		} else {
+			cardsUp[matchIndex[0]] = "match"
+			cardsUp[matchIndex[1]] = "match"
+			countClicks = 0;
+			matchIndex = [];
+			countMatch += 1;
+			if (countMatch == 6) {
+				congrats();
+			}
+		}
 	}
 }	
 
 function turnCard7() {
 	turnCardFunc.funct7();
 	countClicks += 1;
-	cardsUp[7] = true;
+	cardsUp[7] = "up";
 	if (countClicks == 2) {
-		turnAllcardsOver();	
+		if (!checkMatch()) {
+			turnAllcardsOver();
+		} else {
+			cardsUp[matchIndex[0]] = "match"
+			cardsUp[matchIndex[1]] = "match"
+			countClicks = 0;
+			matchIndex = [];
+			countMatch += 1;
+			if (countMatch == 6) {
+				congrats();
+			}
+		}
 	}
 }
 
 function turnCard8() {
 	turnCardFunc.funct8();
 	countClicks += 1;
-	cardsUp[8] = true;
+	cardsUp[8] = "up";
 	if (countClicks == 2) {
-		turnAllcardsOver();	
+		if (!checkMatch()) {
+			turnAllcardsOver();
+		} else {
+			cardsUp[matchIndex[0]] = "match"
+			cardsUp[matchIndex[1]] = "match"
+			countClicks = 0;
+			matchIndex = [];
+			countMatch += 1;
+			if (countMatch == 6) {
+				congrats();
+			}
+		}	
 	}
 }	
 
 function turnCard9() {
 	turnCardFunc.funct9();
 	countClicks += 1;
-	cardsUp[9] = true;
+	cardsUp[9] = "up";
 	if (countClicks == 2) {
-		turnAllcardsOver();	
+		if (!checkMatch()) {
+			turnAllcardsOver();
+		} else {
+			cardsUp[matchIndex[0]] = "match"
+			cardsUp[matchIndex[1]] = "match"
+			countClicks = 0;
+			matchIndex = [];
+			countMatch += 1;
+			if (countMatch == 6) {
+				congrats();
+			}
+		}	
 	}
 }
 
 function turnCard10() {
 	turnCardFunc.funct10();
 	countClicks += 1;
-	cardsUp[10] = true;
+	cardsUp[10] = "up";
 	if (countClicks == 2) {
-		turnAllcardsOver();	
+		if (!checkMatch()) {
+			turnAllcardsOver();
+		} else {
+			cardsUp[matchIndex[0]] = "match"
+			cardsUp[matchIndex[1]] = "match"
+			countClicks = 0;
+			matchIndex = [];
+			countMatch += 1;
+			if (countMatch == 6) {
+				congrats();
+			}
+		}
 	}
 }	
 
 function turnCard11() {
 	turnCardFunc.funct11();
 	countClicks += 1;
-	cardsUp[11] = true;
+	cardsUp[11] = "up";
 	if (countClicks == 2) {
-		turnAllcardsOver();	
+		if (!checkMatch()) {
+			turnAllcardsOver();
+		} else {
+			cardsUp[matchIndex[0]] = "match"
+			cardsUp[matchIndex[1]] = "match"
+			countClicks = 0;
+			matchIndex = [];
+			countMatch += 1;
+			if (countMatch == 6) {
+				congrats();
+			}
+		}
 	}
 }
 
