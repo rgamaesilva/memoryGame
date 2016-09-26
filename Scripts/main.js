@@ -51,7 +51,7 @@ var turnCardFuncBuilder = function(funcNumber) {
 
 };
 
-var turnAllcardsOver = function() {
+var turnCardsOver = function() {
 	var delay = setTimeout(turn, 1000)
 	
 	function turn() {
@@ -70,8 +70,19 @@ var turnAllcardsOver = function() {
 	turnCardFuncBuilder();
 };
 
+var turnAllCardsOver = function() {
+	for (var i = 0; i < 12; i++) {
+		boxes[i].style.background = "url(../memoryGame/Images/logo.png)";
+		boxes[i].style.backgroundRepeat = "no-repeat";
+		boxes[i].style.backgroundPosition = "center center";
+		boxes[i].style.backgroundSize = "contain";
+		boxes[i].style.transform = "rotateY(720deg)";		
+		}
+};
+
+
 var finishGame = function() {
-	turnAllcardsOver();
+	turnAllCardsOver();
 	var delay = setTimeout(reloading, 1000)
 	
 	function reloading () {
@@ -107,7 +118,7 @@ function turnCard0() {
 	cardsUp[0] = "up";
 	if (countClicks == 2) {
 		if (!checkMatch()) {
-			turnAllcardsOver();
+			turnCardsOver();
 		} else {
 			cardsUp[matchIndex[0]] = "match"
 			cardsUp[matchIndex[1]] = "match"
@@ -127,7 +138,7 @@ function turnCard1() {
 	cardsUp[1] = "up";
 	if (countClicks == 2) {
 		if (!checkMatch()) {
-			turnAllcardsOver();
+			turnCardsOver();
 		} else {
 			cardsUp[matchIndex[0]] = "match"
 			cardsUp[matchIndex[1]] = "match"
@@ -148,7 +159,7 @@ function turnCard2() {
 	cardsUp[2] = "up";
 	if (countClicks == 2) {
 		if (!checkMatch()) {
-			turnAllcardsOver();
+			turnCardsOver();
 		} else {
 			cardsUp[matchIndex[0]] = "match"
 			cardsUp[matchIndex[1]] = "match"
@@ -168,7 +179,7 @@ function turnCard3() {
 	cardsUp[3] = "up";
 	if (countClicks == 2) {
 		if (!checkMatch()) {
-			turnAllcardsOver();
+			turnCardsOver();
 		} else {
 			cardsUp[matchIndex[0]] = "match"
 			cardsUp[matchIndex[1]] = "match"
@@ -188,7 +199,7 @@ function turnCard4() {
 	cardsUp[4] = "up";
 	if (countClicks == 2) {
 		if (!checkMatch()) {
-			turnAllcardsOver();
+			turnCardsOver();
 		} else {
 			cardsUp[matchIndex[0]] = "match"
 			cardsUp[matchIndex[1]] = "match"
@@ -208,7 +219,7 @@ function turnCard5() {
 	cardsUp[5] = "up";
 	if (countClicks == 2) {
 		if (!checkMatch()) {
-			turnAllcardsOver();
+			turnCardsOver();
 		} else {
 			cardsUp[matchIndex[0]] = "match"
 			cardsUp[matchIndex[1]] = "match"
@@ -228,7 +239,7 @@ function turnCard6() {
 	cardsUp[6] = "up";
 	if (countClicks == 2) {
 		if (!checkMatch()) {
-			turnAllcardsOver();
+			turnCardsOver();
 		} else {
 			cardsUp[matchIndex[0]] = "match"
 			cardsUp[matchIndex[1]] = "match"
@@ -248,7 +259,7 @@ function turnCard7() {
 	cardsUp[7] = "up";
 	if (countClicks == 2) {
 		if (!checkMatch()) {
-			turnAllcardsOver();
+			turnCardsOver();
 		} else {
 			cardsUp[matchIndex[0]] = "match"
 			cardsUp[matchIndex[1]] = "match"
@@ -268,7 +279,7 @@ function turnCard8() {
 	cardsUp[8] = "up";
 	if (countClicks == 2) {
 		if (!checkMatch()) {
-			turnAllcardsOver();
+			turnCardsOver();
 		} else {
 			cardsUp[matchIndex[0]] = "match"
 			cardsUp[matchIndex[1]] = "match"
@@ -288,7 +299,7 @@ function turnCard9() {
 	cardsUp[9] = "up";
 	if (countClicks == 2) {
 		if (!checkMatch()) {
-			turnAllcardsOver();
+			turnCardsOver();
 		} else {
 			cardsUp[matchIndex[0]] = "match"
 			cardsUp[matchIndex[1]] = "match"
@@ -308,7 +319,7 @@ function turnCard10() {
 	cardsUp[10] = "up";
 	if (countClicks == 2) {
 		if (!checkMatch()) {
-			turnAllcardsOver();
+			turnCardsOver();
 		} else {
 			cardsUp[matchIndex[0]] = "match"
 			cardsUp[matchIndex[1]] = "match"
@@ -328,7 +339,7 @@ function turnCard11() {
 	cardsUp[11] = "up";
 	if (countClicks == 2) {
 		if (!checkMatch()) {
-			turnAllcardsOver();
+			turnCardsOver();
 		} else {
 			cardsUp[matchIndex[0]] = "match"
 			cardsUp[matchIndex[1]] = "match"
