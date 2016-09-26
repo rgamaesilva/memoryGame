@@ -37,9 +37,9 @@ var turnCardFuncBuilder = function(funcNumber) {
 
 
 	if (newDrawnNames[funcNumber] != "grandpa") {
-		boxes[funcNumber].style.background = "url(../Images/" + newDrawnNames[funcNumber] + ".png)";
+		boxes[funcNumber].style.background = "url(../memoryGame/Images/" + newDrawnNames[funcNumber] + ".png)";
 	} else {
-		boxes[funcNumber].style.background = "url(../Images/" + newDrawnNames[funcNumber] + ".jpeg)";
+		boxes[funcNumber].style.background = "url(../memoryGame/Images/" + newDrawnNames[funcNumber] + ".jpeg)";
 	}
 
 	boxes[funcNumber].style.backgroundRepeat = "no-repeat";
@@ -57,7 +57,7 @@ var turnAllcardsOver = function() {
 	function turn() {
 		for (var i = 0; i < 12; i++) {
 			if (cardsUp[i] == "up") {
-				boxes[i].style.background = "url(../Images/logo.png)";
+				boxes[i].style.background = "url(../memoryGame/Images/logo.png)";
 				boxes[i].style.backgroundRepeat = "no-repeat";
 				boxes[i].style.backgroundPosition = "center center";
 				boxes[i].style.backgroundSize = "contain";
