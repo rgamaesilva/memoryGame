@@ -2,18 +2,27 @@ var boxes = document.getElementsByClassName("column");
 var restartButton = document.getElementsByClassName("nav");
 var countClicks = 0;
 
-var namesToDraw = ["peppa", "peppa", "george", "george", "mummy", "mummy", "daddy", "daddy", "grandma", "grandma", "grandpa", "grandpa"];
+var namesToDraw = [];
 var newDrawnNames = [];
 var drawnIndex;
 var characterDrawn;
 
-var cardsUp = ["down", "down", "down", "down", "down", "down", "down", "down", "down", "down", "down", "down" ];
+var cardsUp = [];
 
 var countMatch = 0;
-
+var turnCardFunc = {};
+var matchIndex = [];
 
 var generateShuffle = function() {
-
+	countClicks = 0;
+	namesToDraw = ["peppa", "peppa", "george", "george", "mummy", "mummy", "daddy", "daddy", "grandma", "grandma", "grandpa", "grandpa"];
+	characterDrawn = [];
+	cardsUp = ["down", "down", "down", "down", "down", "down", "down", "down", "down", "down", "down", "down" ];
+	countMatch = 0;
+	turnCardFunc = {};
+	matchIndex = [];
+	newDrawnNames = [];
+	
 	for (var i = 0; i < 12; i++) {
 		
 		drawnIndex = Math.floor(Math.random() * (12 - i));
@@ -25,7 +34,7 @@ var generateShuffle = function() {
 
 
 
-var turnCardFunc = {};
+
 
 
 
@@ -61,7 +70,7 @@ var turnCardsOver = function() {
 				boxes[i].style.backgroundRepeat = "no-repeat";
 				boxes[i].style.backgroundPosition = "center center";
 				boxes[i].style.backgroundSize = "contain";
-				boxes[i].style.transform = "rotateY(360deg)";
+				boxes[i].style.transform = "rotateY(0deg)";
 				cardsUp[i] = "down";
 				}
 		}
@@ -76,22 +85,41 @@ var turnAllCardsOver = function() {
 		boxes[i].style.backgroundRepeat = "no-repeat";
 		boxes[i].style.backgroundPosition = "center center";
 		boxes[i].style.backgroundSize = "contain";
-		boxes[i].style.transform = "rotateY(720deg)";		
+		boxes[i].style.transform = "rotateY(0deg)";
 		}
+};
+
+var shuffleAnimation = function() {
+	for (var i = 0; i < 12; i++) {
+	
+		boxes[i].style.transform = "rotateY(360deg)";
+	}
+	
+	var delay = setTimeout(shuffle, 500);
+	
+	function shuffle() {
+		for (var i = 0; i < 12; i++) {
+		
+		boxes[i].style.transform = "rotateY(0deg)";
+		}
+	}
+	
+		
 };
 
 
 var finishGame = function() {
+	
 	turnAllCardsOver();
-	var delay = setTimeout(reloading, 1000)
 	
-	function reloading () {
-		location.reload(true);
+	var delay = setTimeout(reShuffle, 500);
+	
+	function reShuffle() {
+		shuffleAnimation();
 	}
-	
 };
 
-var matchIndex = [];
+
 var checkMatch = function() {
 	var firstTrue = cardsUp.indexOf("up");
 	var secondTrue = cardsUp.indexOf("up", firstTrue + 1);
@@ -355,6 +383,10 @@ function turnCard11() {
 
 function restartFunc() {
 	finishGame();
+	generateShuffle();
+	for (var i = 0; i < 12; i++) {
+		turnCardFuncBuilder(i);
+	}
 }
 
 var startGame = function() {
