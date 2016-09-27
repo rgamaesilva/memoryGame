@@ -22,6 +22,7 @@ var characterDrawn; // name of the character drawn
 var cardsUp = []; // array to hold the state of cards. Each card can be facing "up" to check match, "down" or up because are already a "match"
 var countMatch = 0; // number that counts the matches so far
 var turnCardFunc = {}; //object that will hold functions for turning each card over and assining the randomized characters to boxes at begining of game
+var turnAndCheckFunc = {}; // object that will hold functions for that will run our turn and check functions when the user clicks on a card
 var matchIndex = []; // array to hold the two indexes of a match temporarily, before this info is passed to the cardsUp array
 var countClicks = 0; // variable to temporarily count clicks on cards to control for two clicks before checking for match 
 
@@ -35,13 +36,14 @@ var countClicks = 0; // variable to temporarily count clicks on cards to control
 
 var generateShuffle = function() {
 	
-	// resets variables to initial states
+	// resets variables to initial states and empties objects
 	countClicks = 0;
 	namesToDraw = ["peppa", "peppa", "george", "george", "mummy", "mummy", "daddy", "daddy", "grandma", "grandma", "grandpa", "grandpa"];
 	characterDrawn = [];
 	cardsUp = ["down", "down", "down", "down", "down", "down", "down", "down", "down", "down", "down", "down" ];
 	countMatch = 0;
 	turnCardFunc = {};
+	turnAndCheckFunc = {};
 	matchIndex = [];
 	newDrawnNames = [];
 	
@@ -63,8 +65,8 @@ var generateShuffle = function() {
 			Turn Cards Function Builder:
 			
 	This is a function that builds an object called
-	TurnCardFunc. The builder function receives a number "funcNumber" 
-	as a parameter and builds a property "functfuncNumber" 
+	TurnCardFunc. The builder function receives a number "functNumber" 
+	as a parameter and builds a property "functfunctNumber" 
 	for the object. 
 	
 	The properties are themselves functions to apply a change of background 
@@ -82,7 +84,7 @@ var generateShuffle = function() {
 	
 	turnCardFunc.funct0();
 	
-	the builder will be run emptied and run
+	the builder will be emptied and run
 	at the start of each game in a loop for indexes 0 to 11.
 	
 	Running the loop within the builder causes a closure 
@@ -94,15 +96,16 @@ var generateShuffle = function() {
 
 
 
-var turnCardFuncBuilder = function(funcNumber) { // turnCardBuilder takes parameter funcNumber. Eg. turnCardFuncBuilder(0);
+var turnCardFuncBuilder = function(functNumber) { // turnCardBuilder takes parameter functNumber. Eg. turnCardFuncBuilder(0);
 	
 
-	turnCardFunc["funct" + funcNumber] = function() { //builds property "functfunNumber" of the turnCardFunc object. Eg. turnCardFunc[funct0] = ...
+	turnCardFunc["funct" + functNumber] = function() { //builds property "functfunNumber" of the turnCardFunc object. Eg. turnCardFunc[funct0] = ...
 
-	// When Called, turnCardFunc.functfuncNumber() will change the background of the card box using our boxes array and the index == funcNumber. 
+	// When Called, turnCardFunc.functfunctNumber() will change the background of the card box using our boxes array and the index == functNumber. 
 	// this if code below just checks if the character in that position is grandpa, because it has a jpeg extension.
-	// the background is assigned by a concatenation of string using our newDrawnNames array at index == funcNumber. 
+	// the background is assigned by a concatenation of string using our newDrawnNames array at index == functNumber. 
 		
+<<<<<<< HEAD
 	if (newDrawnNames[funcNumber] != "grandpa") {
 		boxes[funcNumber].style.background = "url(../Images/" + newDrawnNames[funcNumber] + ".png)";
 	} else {
@@ -111,12 +114,18 @@ var turnCardFuncBuilder = function(funcNumber) { // turnCardBuilder takes parame
 =======
 		boxes[funcNumber].style.background = "url(../memoryGame/Images/" + newDrawnNames[funcNumber] + ".jpeg)"; 
 >>>>>>> work-on-chrome
+=======
+	if (newDrawnNames[functNumber] != "grandpa") {
+		boxes[functNumber].style.background = "url(../memoryGame/Images/" + newDrawnNames[functNumber] + ".png)";
+	} else {
+		boxes[functNumber].style.background = "url(../memoryGame/Images/" + newDrawnNames[functNumber] + ".jpeg)"; 
+>>>>>>> work-on-chrome
 	}
 
-	boxes[funcNumber].style.backgroundRepeat = "no-repeat";
-	boxes[funcNumber].style.backgroundPosition = "center center";
-	boxes[funcNumber].style.backgroundSize = "contain"; // this ensures the background is resized to fit each box.
-	boxes[funcNumber].style.transform = "rotateY(180deg)"; //this rotates the cards 180 degrees and with the transition creates animation.
+	boxes[functNumber].style.backgroundRepeat = "no-repeat";
+	boxes[functNumber].style.backgroundPosition = "center center";
+	boxes[functNumber].style.backgroundSize = "contain"; // this ensures the background is resized to fit each box.
+	boxes[functNumber].style.transform = "rotateY(180deg)"; //this rotates the cards 180 degrees and with the transition creates animation.
 	}
 
 
@@ -263,28 +272,121 @@ var checkMatch = function() {
 			congrats function:
 		this alerts a congratulation message after a timeout.
 		
+		it then restarts the game.
+		
 		It will be called when the user has matched every card. 
 
 *****************************************************************************************************/
 
-var congrats = function() {
+function congrats() {
 	var delay = setTimeout(message, 1000)
 	
 	function message() {
-		alert("CONGRATULATIONS YOU WON!!");
+		if (confirm("You Win!! Want to play again?")) {
+		restartFunc();
+		}
 	}
+	
+	
+	
 }
+
+
+
+
+/****************************************************************************************************
+
+			turnAndCheck Function Builder:
+			
+	This is a function that builds an object called
+	turnAndCheckFunc. The builder function receives a number "functNumber" 
+	as a parameter and builds a property "functfunctNumber" 
+	for the object. 
+	
+	The properties are themselves functions that are called when the boxes are clicked. 
+	
+	For example: turnAndCheckFuncBuilder(0) generates
+	turnAndCheckFunc.funct0, that put to use a lot of the functions built above
+	
+	the turnAndCheckFunc.funct0, for example, will:
+	
+	a) call the turnCardFunc.funct0() to turn over the card
+	b) control and check if this is the first or second click
+	c) change the status of cardsUp[0] to "up" for controlling the state of the card
+	d) if it is the second click, call the checkMatch function.
+	e) if it is NOT a match, call the turnCardsOver() function. 
+	f) if it is a match, assign the cardsUp(0) and its match to "match"
+	g) if it is a match control to see if the user has finished the game
+	
+	
+	...
+	
+	Calling turnAndCheckFuncBuilder(0) only builds the function funct0
+	as properties of the turnAndCheckFunc object. To actually go through steps a to g
+	described above we have to call the functions 
+	within the object after it is built, or, for example,
+	
+	turnAndCheckFunc.funct0(); I will call this function via a click event listener.
+	
+	the builder will be emptied and run
+	at the start of each game in a loop for indexes 0 to 11.
+	
+	Running the loop within the builder causes a closure 
+	problem as the counter variable closes at 11. 
+		
+*****************************************************************************************************/
+
+
+var turnAndCheckFuncBuilder = function(functNumber) {
+	
+	turnAndCheckFunc["funct" + functNumber] = function() {
+		turnCardFunc["funct" + functNumber](); //the function first calls relative turnCardFunc.funct function. This will turn over the card.
+		countClicks += 1; // this adds 1 to our temporary click counter
+		cardsUp[functNumber] = "up"; // this sets the position of the card to up in our card state control array cardsUp. 
+		
+		//checks if it is the second click. If it is the first click, the function finishes. 
+		if (countClicks == 2) {
+		
+			//if it is the second click, calls the checkMatch function. If it is not a match, calls the turnCardsOver function.
+			if (!checkMatch()) { 
+				turnCardsOver();
+		
+			//if it is a match, sets both match cards to the "match" state in our card state control array cardsUp, using our matchIndex.
+			} else {
+				cardsUp[matchIndex[0]] = "match"
+				cardsUp[matchIndex[1]] = "match"
+			
+				//resets the click counter to zero, empties our matchIndex array and adds 1 to our match counter
+				countClicks = 0; 
+				matchIndex = [];
+				countMatch += 1;
+			
+				// checks if the user has reached 6 matches. If so, alerts congrats! a
+				if (countMatch == 6) {
+				congrats();
+				}
+			}
+		}
+		
+	}
+	
+};
 
 /****************************************************************************************************
 
 			restartFunc function:
 		this calls the finishGame function, turning all the cards down and running the shuffling animation.
 		
-		it then calls the generateShuffle function, resetting all the variables and
+		it then calls the generateShuffle function, resetting all the variables, emptying the objects and
 		reshuffling the deck.
 		
 		it the runs the turnCardFuncBuilder for every index, building the functions to change the backgrounds
 		for the reshuffled deck.
+		
+		it then runs the turnAndCheckFuncBuilder for every index, building the functions that run when the box
+		is clicked.
+		
+		after this is clicked, the game is reset and reshuffled. The window does not to be reloaded. 
 
 *****************************************************************************************************/
 
@@ -295,289 +397,25 @@ function restartFunc() {
 	for (var i = 0; i < 12; i++) {
 		turnCardFuncBuilder(i);
 	}
-}
-
-
-/****************************************************************************************************
-
-			turnCard functions.
-		these functions are called when there are clicks on each of cards. there is one turnCard function 
-		for each card. This function will be called via an event listener when the user clicks on a box. 
-		
-		I could have built these with a builder as well, but decided to build one by one.
-		
-*****************************************************************************************************/
-
-
-var turnAndCheckBuilder = function(functNumber) {
 	
-	
-	
-	
-	
-};
-
-
-function turnCard0() {
-	turnCardFunc.funct0(); //the function first calls relative turnCardFunc.funct function. This will turn over the card.
-	countClicks += 1; // this adds 1 to our temporary click counter
-	cardsUp[0] = "up"; // this sets the position of the card to up in our card state control array cardsUp. 
-	
-	//checks if it is the second click. If it is the first click, the function finishes. 
-	if (countClicks == 2) {
-		
-		//if it is the second click, calls the checkMatch function. If it is not a match, calls the turnCardsOver function.
-		if (!checkMatch()) { 
-			turnCardsOver();
-		
-		//if it is a match, sets both match cards to the "match" state in our card state control array cardsUp, using our matchIndex.
-		} else {
-			cardsUp[matchIndex[0]] = "match"
-			cardsUp[matchIndex[1]] = "match"
-			
-			//resets the click counter to zero, empties our matchIndex array and adds 1 to our match counter
-			countClicks = 0; 
-			matchIndex = [];
-			countMatch += 1;
-			
-			// checks if the user has reached 6 matches. If so, alerts congrats! a
-			if (countMatch == 6) {
-				congrats();
-			}
-		}
-	}
-}	
-
-//same comments apply to all the functions below
-
-function turnCard1() {
-	turnCardFunc.funct1();
-	countClicks += 1;
-	cardsUp[1] = "up";
-	if (countClicks == 2) {
-		if (!checkMatch()) {
-			turnCardsOver();
-		} else {
-			cardsUp[matchIndex[0]] = "match"
-			cardsUp[matchIndex[1]] = "match"
-			countClicks = 0;
-			matchIndex = [];
-			countMatch += 1;
-			if (countMatch == 6) {
-				congrats();
-			}
-		}
-		
+	for (var i = 0; i < 12; i++) {
+		turnAndCheckFuncBuilder(i);
 	}
 }
 
-function turnCard2() {
-	turnCardFunc.funct2();
-	countClicks += 1;
-	cardsUp[2] = "up";
-	if (countClicks == 2) {
-		if (!checkMatch()) {
-			turnCardsOver();
-		} else {
-			cardsUp[matchIndex[0]] = "match"
-			cardsUp[matchIndex[1]] = "match"
-			countClicks = 0;
-			matchIndex = [];
-			countMatch += 1;
-			if (countMatch == 6) {
-				congrats();
-			}
-		}	
-	}
-}	
 
-function turnCard3() {
-	turnCardFunc.funct3();
-	countClicks += 1;
-	cardsUp[3] = "up";
-	if (countClicks == 2) {
-		if (!checkMatch()) {
-			turnCardsOver();
-		} else {
-			cardsUp[matchIndex[0]] = "match"
-			cardsUp[matchIndex[1]] = "match"
-			countClicks = 0;
-			matchIndex = [];
-			countMatch += 1;
-			if (countMatch == 6) {
-				congrats();
-			}
-		}
-	}
-}
-
-function turnCard4() {
-	turnCardFunc.funct4();
-	countClicks += 1;
-	cardsUp[4] = "up";
-	if (countClicks == 2) {
-		if (!checkMatch()) {
-			turnCardsOver();
-		} else {
-			cardsUp[matchIndex[0]] = "match"
-			cardsUp[matchIndex[1]] = "match"
-			countClicks = 0;
-			matchIndex = [];
-			countMatch += 1;
-			if (countMatch == 6) {
-				congrats();
-			}
-		}
-	}
-}	
-
-function turnCard5() {
-	turnCardFunc.funct5();
-	countClicks += 1;
-	cardsUp[5] = "up";
-	if (countClicks == 2) {
-		if (!checkMatch()) {
-			turnCardsOver();
-		} else {
-			cardsUp[matchIndex[0]] = "match"
-			cardsUp[matchIndex[1]] = "match"
-			countClicks = 0;
-			matchIndex = [];
-			countMatch += 1;
-			if (countMatch == 6) {
-				congrats();
-			}
-		}
-	}
-}
-
-function turnCard6() {
-	turnCardFunc.funct6();
-	countClicks += 1;
-	cardsUp[6] = "up";
-	if (countClicks == 2) {
-		if (!checkMatch()) {
-			turnCardsOver();
-		} else {
-			cardsUp[matchIndex[0]] = "match"
-			cardsUp[matchIndex[1]] = "match"
-			countClicks = 0;
-			matchIndex = [];
-			countMatch += 1;
-			if (countMatch == 6) {
-				congrats();
-			}
-		}
-	}
-}	
-
-function turnCard7() {
-	turnCardFunc.funct7();
-	countClicks += 1;
-	cardsUp[7] = "up";
-	if (countClicks == 2) {
-		if (!checkMatch()) {
-			turnCardsOver();
-		} else {
-			cardsUp[matchIndex[0]] = "match"
-			cardsUp[matchIndex[1]] = "match"
-			countClicks = 0;
-			matchIndex = [];
-			countMatch += 1;
-			if (countMatch == 6) {
-				congrats();
-			}
-		}
-	}
-}
-
-function turnCard8() {
-	turnCardFunc.funct8();
-	countClicks += 1;
-	cardsUp[8] = "up";
-	if (countClicks == 2) {
-		if (!checkMatch()) {
-			turnCardsOver();
-		} else {
-			cardsUp[matchIndex[0]] = "match"
-			cardsUp[matchIndex[1]] = "match"
-			countClicks = 0;
-			matchIndex = [];
-			countMatch += 1;
-			if (countMatch == 6) {
-				congrats();
-			}
-		}	
-	}
-}	
-
-function turnCard9() {
-	turnCardFunc.funct9();
-	countClicks += 1;
-	cardsUp[9] = "up";
-	if (countClicks == 2) {
-		if (!checkMatch()) {
-			turnCardsOver();
-		} else {
-			cardsUp[matchIndex[0]] = "match"
-			cardsUp[matchIndex[1]] = "match"
-			countClicks = 0;
-			matchIndex = [];
-			countMatch += 1;
-			if (countMatch == 6) {
-				congrats();
-			}
-		}	
-	}
-}
-
-function turnCard10() {
-	turnCardFunc.funct10();
-	countClicks += 1;
-	cardsUp[10] = "up";
-	if (countClicks == 2) {
-		if (!checkMatch()) {
-			turnCardsOver();
-		} else {
-			cardsUp[matchIndex[0]] = "match"
-			cardsUp[matchIndex[1]] = "match"
-			countClicks = 0;
-			matchIndex = [];
-			countMatch += 1;
-			if (countMatch == 6) {
-				congrats();
-			}
-		}
-	}
-}	
-
-function turnCard11() {
-	turnCardFunc.funct11();
-	countClicks += 1;
-	cardsUp[11] = "up";
-	if (countClicks == 2) {
-		if (!checkMatch()) {
-			turnCardsOver();
-		} else {
-			cardsUp[matchIndex[0]] = "match"
-			cardsUp[matchIndex[1]] = "match"
-			countClicks = 0;
-			matchIndex = [];
-			countMatch += 1;
-			if (countMatch == 6) {
-				congrats();
-			}
-		}
-	}
-}
 
 /****************************************************************************************************
 
 			startGame function.
 		this functions will be run at window.onload. 
-		it shuffles the deck for the first time.
-		it builds the turnCardFuncBuilder functions
+		it calls generateShuffle to generate a new random order or characters and reset the variables. 
+		it builds the turnCardFunc functions
+		it builds the turnAndCheckFunc functions
 		it adds eventlisteners for everybox that calls the turnCard functions. 
+		it adds an event listener for the restart button that calls our restart function
+		it calls the shuffle animation. 
+		
 		
 *****************************************************************************************************/
 
@@ -586,19 +424,18 @@ var startGame = function() {
 	for (var i = 0; i < 12; i++) {
 		turnCardFuncBuilder(i);
 	}
-	boxes[0].addEventListener("click", turnCard0);
-	boxes[1].addEventListener("click", turnCard1);
-	boxes[2].addEventListener("click", turnCard2);
-	boxes[3].addEventListener("click", turnCard3);
-	boxes[4].addEventListener("click", turnCard4);
-	boxes[5].addEventListener("click", turnCard5);
-	boxes[6].addEventListener("click", turnCard6);
-	boxes[7].addEventListener("click", turnCard7);
-	boxes[8].addEventListener("click", turnCard8);
-	boxes[9].addEventListener("click", turnCard9);
-	boxes[10].addEventListener("click", turnCard10);
-	boxes[11].addEventListener("click", turnCard11);
+	
+	for (var i = 0; i < 12; i++) {
+		turnAndCheckFuncBuilder(i);
+	}
+	
+	for (var i = 0; i< 12; i++) {
+		boxes[i].addEventListener("click", turnAndCheckFunc["funct" + i]);
+	}
+	
 	restartButton[0].addEventListener("click", restartFunc);
+	
+	shuffleAnimation();
 
 };
 
