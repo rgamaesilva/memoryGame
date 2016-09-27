@@ -1,5 +1,17 @@
 /****************************************************************************************************
 
+	dynamically create 12 divs
+	
+*****************************************************************************************************/
+
+var boxItemTemplate =
+	'<div class="column third">' 
++	'</div>'
+;
+
+
+/****************************************************************************************************
+
 	get html elements into arrays
 
 *****************************************************************************************************/
@@ -424,13 +436,22 @@ var startGame = function() {
 	
 	restartButton[0].addEventListener("click", restartFunc);
 	
-	shuffleAnimation();
-
+	var delay = setTimeout(animate, 200)
+	
+	function animate() {
+		shuffleAnimation();
+	}
 };
 
 
 
 window.onload = function() {
+	var boxContainer = document.getElementsByClassName('container')[0];
+	boxContainer.innerHTML = '';
+	for (var i = 0; i < 12; i++) {
+		boxContainer.innerHTML += boxItemTemplate; 
+	}
+	
 	startGame();
 }
 
