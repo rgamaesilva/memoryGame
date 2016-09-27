@@ -17,7 +17,7 @@ var boxItemTemplate =
 *****************************************************************************************************/
 
 var boxes = document.getElementsByClassName("column"); // get the card (divs) boxes into an array called boxes
-var restartButton = document.getElementsByClassName("nav"); // get the buttons into an array called restartButton
+var restartButton = document.getElementsByTagName("input"); // get the buttons into an array called restartButton
 
 
 /****************************************************************************************************
