@@ -119,10 +119,10 @@ var turnCardFuncBuilder = function(functNumber) { // turnCardBuilder takes param
 		
 
 	if (newDrawnNames[functNumber] != "grandpa") {
-		boxes[functNumber].style.background = "url(../Images/" + newDrawnNames[functNumber] + ".png)";
+		boxes[functNumber].style.background = "url(../memoryGame/Images/" + newDrawnNames[functNumber] + ".png)";
 	} else {
 
-		boxes[functNumber].style.background = "url(../Images/" + newDrawnNames[functNumber] + ".jpeg)";
+		boxes[functNumber].style.background = "url(../memoryGame/Images/" + newDrawnNames[functNumber] + ".jpeg)";
 
 	}
 
@@ -156,7 +156,7 @@ var turnCardsOver = function() {
 	function turn() {
 		for (var i = 0; i < 12; i++) {
 			if (cardsUp[i] == "up") {
-				boxes[i].style.background = "url(../Images/logo.png)";
+				boxes[i].style.background = "url(../memoryGame/Images/logo.png)";
 				boxes[i].style.backgroundRepeat = "no-repeat";
 				boxes[i].style.backgroundPosition = "center center";
 				boxes[i].style.backgroundSize = "contain";
@@ -185,7 +185,7 @@ var turnCardsOver = function() {
 
 var turnAllCardsOver = function() {
 	for (var i = 0; i < 12; i++) {
-		boxes[i].style.background = "url(../Images/logo.png)";
+		boxes[i].style.background = "url(../memoryGame/Images/logo.png)";
 		boxes[i].style.backgroundRepeat = "no-repeat";
 		boxes[i].style.backgroundPosition = "center center";
 		boxes[i].style.backgroundSize = "contain";
