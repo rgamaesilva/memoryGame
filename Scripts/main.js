@@ -117,21 +117,13 @@ var turnCardFuncBuilder = function(functNumber) { // turnCardBuilder takes param
 	// this if code below just checks if the character in that position is grandpa, because it has a jpeg extension.
 	// the background is assigned by a concatenation of string using our newDrawnNames array at index == functNumber. 
 		
-<<<<<<< HEAD
-	if (newDrawnNames[funcNumber] != "grandpa") {
-		boxes[funcNumber].style.background = "url(../Images/" + newDrawnNames[funcNumber] + ".png)";
-	} else {
-<<<<<<< HEAD
-		boxes[funcNumber].style.background = "url(../Images/" + newDrawnNames[funcNumber] + ".jpeg)";
-=======
-		boxes[funcNumber].style.background = "url(../memoryGame/Images/" + newDrawnNames[funcNumber] + ".jpeg)"; 
->>>>>>> work-on-chrome
-=======
+
 	if (newDrawnNames[functNumber] != "grandpa") {
-		boxes[functNumber].style.background = "url(../memoryGame/Images/" + newDrawnNames[functNumber] + ".png)";
+		boxes[functNumber].style.background = "url(../Images/" + newDrawnNames[functNumber] + ".png)";
 	} else {
-		boxes[functNumber].style.background = "url(../memoryGame/Images/" + newDrawnNames[functNumber] + ".jpeg)"; 
->>>>>>> work-on-chrome
+
+		boxes[functNumber].style.background = "url(../Images/" + newDrawnNames[functNumber] + ".jpeg)";
+
 	}
 
 	boxes[functNumber].style.backgroundRepeat = "no-repeat";
