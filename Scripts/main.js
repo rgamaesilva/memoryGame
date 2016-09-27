@@ -344,34 +344,54 @@ function congrats() {
 var turnAndCheckFuncBuilder = function(functNumber) {
 	
 	turnAndCheckFunc["funct" + functNumber] = function() {
+		
+		
 		turnCardFunc["funct" + functNumber](); //the function first calls relative turnCardFunc.funct function. This will turn over the card.
 		countClicks += 1; // this adds 1 to our temporary click counter
 		cardsUp[functNumber] = "up"; // this sets the position of the card to up in our card state control array cardsUp. 
+			
 		
+		
+
 		//checks if it is the second click. If it is the first click, the function finishes. 
 		if (countClicks == 2) {
-		
+			stopListenClicks();
 			//if it is the second click, calls the checkMatch function. If it is not a match, calls the turnCardsOver function.
+			
 			if (!checkMatch()) { 
 				turnCardsOver();
-		
+				var delayToClick = setTimeout(waitToClick1, 1600);
+				function waitToClick1() {
+					listenClicks();
+				}
+				
 			//if it is a match, sets both match cards to the "match" state in our card state control array cardsUp, using our matchIndex.
 			} else {
+				boxes[functNumber].removeEventListener("click", turnAndCheckFunc["funct" + functNumber]);
 				cardsUp[matchIndex[0]] = "match"
 				cardsUp[matchIndex[1]] = "match"
-			
+
 				//resets the click counter to zero, empties our matchIndex array and adds 1 to our match counter
 				countClicks = 0; 
 				matchIndex = [];
-				countMatch += 1;
-			
-				// checks if the user has reached 6 matches. If so, alerts congrats! a
-				if (countMatch == 6) {
-				congrats();
+				countMatch = 0;
+				for (var i = 0; i < 12; i++) {
+					if (cardsUp[i] === "match") {
+						countMatch += 1;
+						
+					}	
 				}
+				console.log(countMatch);
+				
+
+				// checks if the user has reached 6 matches. If so, alerts congrats! a
+				if (countMatch === 12) {
+					congrats();
+				}
+				listenClicks();
 			}
 		}
-		
+		boxes[functNumber].removeEventListener("click", turnAndCheckFunc["funct" + functNumber]);
 	}
 	
 };
@@ -407,6 +427,20 @@ function restartFunc() {
 	}
 }
 
+function listenClicks() {
+	for (var i = 0; i< 12; i++) {
+		if (cardsUp[i] == "down") {
+			boxes[i].addEventListener("click", turnAndCheckFunc["funct" + i]);
+		}
+	}
+}
+
+function stopListenClicks() {
+	for (var i = 0; i< 12; i++) {
+		boxes[i].removeEventListener("click", turnAndCheckFunc["funct" + i]);
+	}
+}
+
 
 
 /****************************************************************************************************
@@ -433,9 +467,7 @@ var startGame = function() {
 		turnAndCheckFuncBuilder(i);
 	}
 	
-	for (var i = 0; i< 12; i++) {
-		boxes[i].addEventListener("click", turnAndCheckFunc["funct" + i]);
-	}
+	listenClicks();
 	
 	restartButton[0].addEventListener("click", restartFunc);
 	
@@ -456,6 +488,7 @@ window.onload = function() {
 	}
 	
 	startGame();
+
 }
 
 
