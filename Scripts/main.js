@@ -425,6 +425,7 @@ function restartFunc() {
 	for (var i = 0; i < 12; i++) {
 		turnAndCheckFuncBuilder(i);
 	}
+	listenClicks();
 }
 
 function listenClicks() {
