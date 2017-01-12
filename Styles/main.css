@@ -3,6 +3,20 @@
 	text-align: center;
 }
 
+/* preload images so no lag at show*/
+body::after{
+    position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
+    content:url(../Images/daddy.png) 
+		url(../Images/george.png) 
+		url(../Images/grandma.png) 
+		url(../Images/grandpa.jpeg) 
+		url(../Images/logo.png) 
+		url(../Images/logobanner.png) 
+		url(../Images/mummy.png)
+		url(../Images/peppa.png);
+}
+
+
 body {
 	position: relative;
 	font-family: 'Gochi Hand', cursive;
