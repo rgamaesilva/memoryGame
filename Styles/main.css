@@ -6,12 +6,12 @@
 /* preload images so no lag at show*/
 body::after{
     position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
-    content:url(../Images/daddy.png) 
-		url(../Images/george.png) 
-		url(../Images/grandma.png) 
-		url(../Images/grandpa.jpeg) 
-		url(../Images/logo.png) 
-		url(../Images/logobanner.png) 
+    content:url(../Images/daddy.png)
+		url(../Images/george.png)
+		url(../Images/grandma.png)
+		url(../Images/grandpa.jpeg)
+		url(../Images/logo.png)
+		url(../Images/logobanner.png)
 		url(../Images/mummy.png)
 		url(../Images/peppa.png);
 }
@@ -27,7 +27,7 @@ body {
 	font-size: 0.8em;
 	padding-top: 1em;
 	margin-bottom: 1.5em;
-	background-color: hotpink;
+	background-color: blue;
 	color: white
 }
 
@@ -54,6 +54,5 @@ body {
 	padding-right: 1rem;
 	width: 33%;
 	border: 1px solid gray;
-	
-}
 
+}
